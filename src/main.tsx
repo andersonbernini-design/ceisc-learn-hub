@@ -9,23 +9,17 @@ async function enableMocking() {
 
   try {
     const { worker } = await import('./mocks/browser');
-    
-    return worker.start({
+    await worker.start({
       onUnhandledRequest: 'bypass',
     });
   } catch (error) {
-    console.error('Failed to start MSW:', error);
-    return;
+    console.error('MSW Error:', error);
   }
 }
 
-enableMocking()
-  .then(() => {
-    const root = document.getElementById("root");
-    if (root) {
-      createRoot(root).render(<App />);
-    }
-  })
-  .catch((error) => {
-    console.error('Failed to initialize app:', error);
-  });
+enableMocking().finally(() => {
+  const root = document.getElementById("root");
+  if (root) {
+    createRoot(root).render(<App />);
+  }
+});
