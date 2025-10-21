@@ -19,11 +19,14 @@ export function AppSidebar() {
 
   const alunoItems = [
     { title: 'Dashboard', url: '/dashboard', icon: Home, color: 'text-primary' },
-    { title: 'Curso atual', url: '/cursos', icon: BookOpen, color: 'text-primary' },
-    { title: 'Cronograma', url: '/cronograma', icon: Calendar, color: 'text-primary' },
-    { title: 'Material de estudos', url: '/questoes', icon: ClipboardList, color: 'text-primary' },
-    { title: 'Anotações', url: '/simulados', icon: FileText, color: 'text-primary' },
-    { title: 'Desempenho', url: '/desempenho', icon: Library, color: 'text-primary' },
+    { title: 'Meus cursos', url: '/meus-cursos', icon: BookOpen, color: 'text-primary' },
+    { title: 'Material de estudo', url: '/questoes', icon: ClipboardList, color: 'text-primary' },
+    { title: 'Simulados', url: '/simulados', icon: FileText, color: 'text-primary' },
+    { title: 'Banco de questões', url: '/questoes', icon: Library, color: 'text-primary' },
+    { title: 'Notificações', url: '/notificacoes', icon: Bell, color: 'text-primary' },
+    { title: 'Minhas perguntas', url: '/minhas-perguntas', icon: MessageCircle, color: 'text-primary' },
+    { title: 'Avaliações', url: '/avaliacoes', icon: CheckSquare, color: 'text-primary' },
+    { title: 'Certificados', url: '/certificados', icon: Award, color: 'text-primary' },
   ];
 
   const professorItems = [
