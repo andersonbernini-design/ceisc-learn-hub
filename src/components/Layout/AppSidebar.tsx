@@ -18,12 +18,12 @@ export function AppSidebar() {
   const { user } = useAuthStore();
 
   const alunoItems = [
-    { title: 'Dashboard', url: '/dashboard', icon: Home },
-    { title: 'Meus Cursos', url: '/cursos', icon: BookOpen },
-    { title: 'Banco de Questões', url: '/questoes', icon: ClipboardList },
-    { title: 'Simulados', url: '/simulados', icon: FileText },
-    { title: 'Cronograma', url: '/cronograma', icon: Calendar },
-    { title: 'Livraria', url: '/livraria', icon: Library },
+    { title: 'Dashboard', url: '/dashboard', icon: Home, color: 'text-primary' },
+    { title: 'Curso atual', url: '/cursos', icon: BookOpen, color: 'text-primary' },
+    { title: 'Cronograma', url: '/cronograma', icon: Calendar, color: 'text-primary' },
+    { title: 'Material de estudos', url: '/questoes', icon: ClipboardList, color: 'text-primary' },
+    { title: 'Anotações', url: '/simulados', icon: FileText, color: 'text-primary' },
+    { title: 'Desempenho', url: '/desempenho', icon: Library, color: 'text-primary' },
   ];
 
   const professorItems = [
@@ -38,36 +38,38 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="border-b p-4">
-        <div className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-xl">
-            C
+      <SidebarHeader className="border-b border-sidebar-border p-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-8 w-8 items-center justify-center rounded bg-primary text-primary-foreground font-bold text-base">
+            ▶
           </div>
           <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-            <span className="font-bold text-lg">CEISC</span>
-            <span className="text-xs text-muted-foreground">Portal do Aluno</span>
+            <span className="font-bold text-base tracking-wide">ceisc</span>
+            <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Ferramentas</span>
           </div>
         </div>
       </SidebarHeader>
       
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Menu Principal</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider text-muted-foreground px-3 mb-1">Ferramentas</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-0.5">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={item.url}
                       className={({ isActive }) =>
-                        isActive
-                          ? 'bg-sidebar-accent text-sidebar-accent-foreground'
-                          : 'hover:bg-sidebar-accent/50'
+                        `flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors ${
+                          isActive
+                            ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium'
+                            : 'text-sidebar-foreground hover:bg-sidebar-accent/50'
+                        }`
                       }
                     >
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.title}</span>
+                      <item.icon className={`h-5 w-5 ${(item as any).color || 'text-current'}`} />
+                      <span className="text-sm">{item.title}</span>
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

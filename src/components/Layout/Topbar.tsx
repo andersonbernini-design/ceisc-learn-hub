@@ -24,34 +24,26 @@ export function Topbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-card/80 backdrop-blur-sm">
-      <div className="flex h-16 items-center gap-4 px-4 md:px-6">
-        <SidebarTrigger />
+    <header className="sticky top-0 z-40 border-b border-border bg-background">
+      <div className="flex h-14 items-center gap-4 px-4 md:px-6">
+        <SidebarTrigger className="-ml-1" />
         
-        <div className="flex flex-1 items-center gap-4">
-          <div className="relative hidden md:block flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              placeholder="Buscar cursos, aulas..."
-              className="pl-10"
-            />
-          </div>
-        </div>
+        <div className="flex flex-1 items-center justify-end gap-3">
+          <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full">
+            <Search className="h-5 w-5 text-muted-foreground" />
+          </Button>
 
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5" />
-            <span className="absolute -right-1 -top-1 h-4 w-4 rounded-full bg-destructive text-[10px] font-medium text-destructive-foreground flex items-center justify-center">
-              3
-            </span>
+          <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full relative">
+            <Bell className="h-5 w-5 text-muted-foreground" />
+            <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-destructive"></span>
           </Button>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                <Avatar>
+              <Button variant="ghost" className="h-9 w-9 rounded-full p-0">
+                <Avatar className="h-9 w-9">
                   <AvatarImage src={user?.avatar} alt={user?.nome} />
-                  <AvatarFallback>
+                  <AvatarFallback className="text-xs">
                     {user?.nome.split(' ').map(n => n[0]).join('').substring(0, 2)}
                   </AvatarFallback>
                 </Avatar>
