@@ -12,6 +12,7 @@ import RecuperarSenha from "./pages/RecuperarSenha";
 import Dashboard from "./pages/Dashboard";
 import Cursos from "./pages/Cursos";
 import CursoDetalhes from "./pages/CursoDetalhes";
+import AulaAtual from "./pages/AulaAtual";
 import Questoes from "./pages/Questoes";
 import Simulados from "./pages/Simulados";
 import Avaliacoes from "./pages/Avaliacoes";
@@ -50,6 +51,7 @@ const App = () => {
               <Route path="/meus-cursos" element={<MeusCursos />} />
               <Route path="/cursos" element={<Cursos />} />
               <Route path="/cursos/:id" element={<CursoDetalhes />} />
+              <Route path="/aula/:cursoId/:aulaId" element={<AulaAtual />} />
               <Route path="/questoes" element={<Questoes />} />
               <Route path="/simulados" element={<Simulados />} />
               <Route path="/avaliacoes" element={<Avaliacoes />} />

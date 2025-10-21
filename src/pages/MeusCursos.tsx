@@ -56,6 +56,39 @@ export default function MeusCursos() {
     navigate('/curso-atual');
   };
 
+  const handleAcessarCurso = (cursoId: string) => {
+    // Redireciona para a primeira aula do curso (ou última aula assistida)
+    navigate(`/aula/${cursoId}/a1`);
+  };
+
+  // Mock de cursos recomendados
+  const cursosRecomendados = [
+    {
+      id: '10',
+      categoria: 'concursos',
+      titulo: 'Preparação para Magistratura Federal',
+      descricao: 'Curso completo para concursos de magistratura federal com foco em direito constitucional e administrativo.',
+      thumbnail: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800',
+      recomendadoEquipe: true,
+    },
+    {
+      id: '11',
+      categoria: 'oab_1fase',
+      titulo: 'OAB 1ª Fase - Reta Final',
+      descricao: 'Revisão intensiva para a 1ª fase do exame da OAB com questões comentadas.',
+      thumbnail: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800',
+      recomendadoEquipe: false,
+    },
+    {
+      id: '12',
+      categoria: 'pos_graduacao',
+      titulo: 'Pós-Graduação em Direito Tributário',
+      descricao: 'Especialização completa em direito tributário com casos práticos e atualizações legislativas.',
+      thumbnail: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800',
+      recomendadoEquipe: true,
+    },
+  ];
+
   return (
     <div className="space-y-6">
       <div>
@@ -148,7 +181,11 @@ export default function MeusCursos() {
                   </CardHeader>
 
                   <CardContent>
-                    <Button variant="default" className="w-full">
+                    <Button 
+                      variant="default" 
+                      className="w-full"
+                      onClick={() => handleAcessarCurso(curso.id)}
+                    >
                       Acessar
                     </Button>
                   </CardContent>
@@ -187,58 +224,59 @@ export default function MeusCursos() {
         </Tabs>
       </div>
 
-      {/* Cards de Acesso Rápido */}
-      <div className="grid gap-6 md:grid-cols-3">
-        <Card className="hover:shadow-elevated transition-all cursor-pointer">
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <BarChart3 className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle className="text-lg">Meu desempenho</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              Abaixo você encontra a ultima atividade realizada na plataforma
-            </p>
-            <Button variant="outline" className="w-full">Acessar</Button>
-          </CardContent>
-        </Card>
+      {/* Cursos Recomendados */}
+      <div className="space-y-4">
+        <div>
+          <h2 className="text-xl font-semibold mb-2">Cursos recomendados</h2>
+          <p className="text-sm text-muted-foreground">
+            Sugestões personalizadas baseadas no seu histórico e perfil de estudos
+          </p>
+        </div>
 
-        <Card className="hover:shadow-elevated transition-all cursor-pointer">
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <HelpCircle className="h-6 w-6 text-primary" />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {cursosRecomendados.map((curso) => (
+            <Card key={curso.id} className="group hover:shadow-elevated transition-all overflow-hidden">
+              <div className="relative aspect-video overflow-hidden">
+                <img 
+                  src={curso.thumbnail} 
+                  alt={curso.titulo}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                {curso.recomendadoEquipe && (
+                  <Badge className="absolute top-3 left-3 bg-accent text-accent-foreground">
+                    Recomendado
+                  </Badge>
+                )}
               </div>
-              <CardTitle className="text-lg">Minhas perguntas</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              Abaixo você encontra a ultima atividade realizada na plataforma
-            </p>
-            <Button variant="outline" className="w-full">Acessar</Button>
-          </CardContent>
-        </Card>
+              
+              <CardHeader className="space-y-3">
+                <div>
+                  <Badge variant="outline" className="mb-2">
+                    {curso.categoria === 'oab_1fase' ? '1ª Fase OAB' : 
+                     curso.categoria === 'concursos' ? 'Concursos' : 
+                     'Pós-graduação'}
+                  </Badge>
+                  <CardTitle className="text-base leading-snug line-clamp-2">
+                    {curso.titulo}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+                    {curso.descricao}
+                  </p>
+                </div>
+              </CardHeader>
 
-        <Card className="hover:shadow-elevated transition-all cursor-pointer">
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <BarChart3 className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle className="text-lg">Meu desempenho</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              How do you create compelling presentations that wow your colleague.
-            </p>
-            <Button variant="outline" className="w-full">Acessar</Button>
-          </CardContent>
-        </Card>
+              <CardContent>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => navigate(`/cursos/${curso.id}`)}
+                >
+                  Ver detalhes
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );

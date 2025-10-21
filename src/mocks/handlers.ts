@@ -124,4 +124,65 @@ export const handlers = [
 
     return HttpResponse.json(filteredAvisos);
   }),
+
+  // AULAS
+  http.get('/api/cursos/:id/aulas', async ({ params }) => {
+    await delay(300);
+    const curso = courses.find((c) => c.id === params.id);
+    
+    if (!curso) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    const todasAulas = curso.modulos.flatMap(m => 
+      m.disciplinas.flatMap(d => 
+        d.aulas.map(a => ({
+          ...a,
+          moduloId: m.id,
+          moduloTitulo: m.titulo,
+          disciplinaId: d.id,
+          disciplinaTitulo: d.titulo,
+        }))
+      )
+    );
+
+    return HttpResponse.json(todasAulas);
+  }),
+
+  http.get('/api/aulas/:id', async ({ params }) => {
+    await delay(300);
+    
+    for (const curso of courses) {
+      for (const modulo of curso.modulos) {
+        for (const disciplina of modulo.disciplinas) {
+          const aula = disciplina.aulas.find(a => a.id === params.id);
+          if (aula) {
+            return HttpResponse.json({
+              ...aula,
+              moduloId: modulo.id,
+              moduloTitulo: modulo.titulo,
+              disciplinaId: disciplina.id,
+              disciplinaTitulo: disciplina.titulo,
+              cursoId: curso.id,
+              cursoTitulo: curso.titulo,
+            });
+          }
+        }
+      }
+    }
+
+    return new HttpResponse(null, { status: 404 });
+  }),
+
+  http.put('/api/aulas/:id/progresso', async ({ request }) => {
+    await delay(300);
+    const body = await request.json();
+    console.log('Progresso atualizado:', body);
+    return HttpResponse.json({ success: true });
+  }),
+
+  http.post('/api/aulas/:id/concluir', async () => {
+    await delay(300);
+    return HttpResponse.json({ success: true });
+  }),
 ];
