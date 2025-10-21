@@ -124,16 +124,13 @@ export default function MeusCursos() {
           Texto de apoio com informações sobre a área que o aluno esta no momento.
         </p>
 
-        <Tabs defaultValue="em_andamento" className="space-y-6">
+        <Tabs defaultValue="todos" className="space-y-6">
           <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:inline-grid">
-            <TabsTrigger value="em_andamento">Em andamento</TabsTrigger>
+            <TabsTrigger value="todos">Todos os cursos</TabsTrigger>
             <TabsTrigger value="favoritos">Favoritos</TabsTrigger>
-            <TabsTrigger value="eventos">
-              Eventos
-              <Badge variant="secondary" className="ml-2">2</Badge>
-            </TabsTrigger>
-            <TabsTrigger value="finalizado">Finalizado</TabsTrigger>
-            <TabsTrigger value="todos">Mostrar todos</TabsTrigger>
+            <TabsTrigger value="em_andamento">Em andamento</TabsTrigger>
+            <TabsTrigger value="eventos">Eventos</TabsTrigger>
+            <TabsTrigger value="finalizado">Finalizados</TabsTrigger>
           </TabsList>
 
           <TabsContent value="em_andamento" className="space-y-6">
