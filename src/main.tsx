@@ -7,13 +7,25 @@ async function enableMocking() {
     return;
   }
 
-  const { worker } = await import('./mocks/browser');
-
-  return worker.start({
-    onUnhandledRequest: 'bypass',
-  });
+  try {
+    const { worker } = await import('./mocks/browser');
+    
+    return worker.start({
+      onUnhandledRequest: 'bypass',
+    });
+  } catch (error) {
+    console.error('Failed to start MSW:', error);
+    return;
+  }
 }
 
-enableMocking().then(() => {
-  createRoot(document.getElementById("root")!).render(<App />);
-});
+enableMocking()
+  .then(() => {
+    const root = document.getElementById("root");
+    if (root) {
+      createRoot(root).render(<App />);
+    }
+  })
+  .catch((error) => {
+    console.error('Failed to initialize app:', error);
+  });
